@@ -1,0 +1,8 @@
+run cmd with administrator
+diskpart
+list disk
+select disk X (replace X with the disk number of your bootable USB drive)
+clean
+create partition primary
+format fs=fat32 quick or format fs=ntfs quick (select one file system based on your own needs)
+exit

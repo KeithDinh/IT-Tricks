@@ -1,0 +1,145 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 A Configuration Guide for the 2017 Razer Blade FHD\par
+Support\par
+I spent a long time doing research before finally deciding to purchase the Razer Blade 2017 FHD. In the process, I discovered a large variety of complaints, issues, and problems people were reporting having on their devices. Now, before I continue, understand that I don't believe that this is the end all solution for all the possible problems that can be had with the Blade considering that many people were having issues with their hardware as well (i.e. coil whine, logic board failure, etc). However, I believe that a good number of the problems people were reporting and many of their complaints were simply due to them not having taken the time to properly configure the device. That being said, I have came up with a configuration which has been completely stable, keeps fans at a minimum when in use, and allows a user to still have full access to all the power that comes with their Blade 2017. I will be posting all the pieces in order to use this configuration and would love to have input on how it worked out for people.\par
+\par
+Just going to state as a disclaimer, this configuration might not be popular considering that it goes against many of the other first-time setup guides people have posted, and keeps both the GeForce Experience and Killer Networks software active and in use (more on this later...).\par
+\par
+1. First bootup\par
+\par
+Upon booting up the Razer Blade 2017 for the first time, run through the configuration until you get to the desktop. It's recommended that you install Google Chrome (download here) or any other preferred browser (Firefox can be downloaded here), then immediately go to the Razer website (link found here) and download and install ALL the packages on that page with the exception of packages labelled with "All-In-One", the older "WIFI - Killer Wireless-AC 1535 WLAN driver", and the older "AUDIO - Realtek Audio & Dolby Digital Plus Package". I personally rebooted after each installation if it asked for a reboot, but installing them all at once and deferring the reboot until done shouldn't be a problem. Worth noting is that at this point the system was freezing up every 10 or so seconds in "blips" for me due to what seemed to be Nvidia Optimus switching between graphics cards for no reason. Configuring things as shown below solved the issue.\par
+\par
+2. Updating the System\par
+\par
+At this point, a bunch of software (Razer Synapse, Killer Networking, GeForce Experience, Windows Update) have probably queued up notifications for updates. Complete the software ones first, including the Nvidia GeForce GameReady Driver (found by opening the GeForce Experience program and going to the "Drivers" tab). Also install the Samsung NVMe Driver found here in order to get the proper NVMe speeds from the drive (which Windows default drivers do NOT allow for...come on Microsoft...) and (optionally) the Intel Integrated Graphics Driver update from here. Then let the Windows Updates install, a task which on a high speed connection took my system a few hours to complete. Note that at this point it's likely that every task you do, every installation, and the Windows updates will be causing the fans to repeatedly ramp up and down quite loudly, but we'll deal with that later. For now, just realize that this is normal.\par
+\par
+3. Power Configuration\par
+\par
+After Windows Updates have completed and the system boots up again, configuration and optimization can begin. First issue to deal with is power management. The Razer tends to ramp up the fans needlessly so a good power plan is needed to balance things out. An added benefit is with this power plan, battery life for productivity tasks is 7-9 hours and the fans remain off (good for students who want to bring their Blades to class). You can either apply these power plans manually with the following pictures or with the instructions further down on how to apply them (more advanced, but at the same time saves time). Also take the time to go into "Settings" (The Windows App with the white cog on a blue background), go to "System" > "Battery", check off Turn battery saver on automatically and move the bar to 100% as well as select "Optimize for battery life" in the dropdown under When watching movies and videos on battery power.\par
+\par
+If you are on the latest version of Windows and do not see any power profiles except for Balanced, then take power saver values and use them as unplugged settings in the Balanced power plan. Also click on the battery in the bottom right corner and move the slider to the middle. Avoid the \ldblquote Performance\rdblquote  side of the slider at all times or you will likely burn out your system within months due to its bad implementation.\par
+\par
+The configuration images for the Balanced power plan can be found here. The configuration images for the Power Saver power plan can be found here.\par
+\par
+Ignore this paragraph\par
+\par
+For the quick and easy way to setup these power plans, download this and this. Then press Windows Key + X and select either Windows Powershell (Admin) or Command Prompt (Admin) (whichever one is in the list). Assuming you use the default Chrome download directory, type:\par
+\par
+powercfg -import "C:\\Users(YourUserAccountFolder)\\Downloads\\PowerSaverPowerPlanBackup.pow"\par
+\par
+then\par
+\par
+powercfg -import "C:\\Users(YourUserAccountFolder)\\Downloads\\BalancedPowerPlanBackup.pow"\par
+\par
+Ok, you can stop ignoring now\par
+\par
+EXPERIMENTAL: I also have a special power plan, which can only be added by importing it's file and cannot be activated using Razer Synapse which has the best possible power savings achievable on a Razer Blade that I can possibly configure. The best I can configure entails 10 hours+ while using the system to perform standard tasks such as web browsing, watching videos, and using Office. This is completely optional and updated regularly. Check the edits to see when it has been changed.\par
+\par
+To use it, download this. Then press Windows Key + X and select either Windows Powershell (Admin) or Command Prompt (Admin) (whichever one is in the list). Assuming you use the default Chrome download directory, type:\par
+\par
+powercfg -import "C:\\Users\\(YourUserAccountFolder)\\Downloads\\MaximumPowerSaver.pow"\par
+\par
+In order to activate it, you would have to manually select it by right clicking on the battery in the bottom-right of the screen, click "Power Options", and select "Maximum Power Saver" from the list of plans. If it doesn't show up, click "Show additional plans" to make it visible.\par
+\par
+EXPERIMENTAL V2: There is now a second power plan I have put out in a comment on another post with a different goal: It completely replaces the new Windows Balanced Power Plan and entirely gets rid of the slider. When on battery, your fans should almost never turn on and everything will run closer to the way they do on the first experimental power plan. However, if you push the system when on battery it won't limit you or choke. When the system is plugged in, it will do it's best to keep the system from getting hot while not limiting the user in any way from taking full advantage of everything the processor has to offer.\par
+\par
+It's basically the ultimate optimized for Razer Blade 2017 balanced power profile which keeps the system from getting hot for no reason and wasting resources, lowering it's lifespan, when it's plugged in and when unplugged gives you almost the best possible battery life but with some concessions to offer the best user experience.\par
+\par
+To get it, first download the profile from here.\par
+\par
+To install it, press the Windows Key + X and select either Windows Powershell (Admin) or Command Prompt (Admin) (whichever one is in the list). Assuming you use the default Chrome download directory, type:\par
+\par
+powercfg -import "C:\\Users\\(YourUserAccountFolder)\\Downloads\\RazerBladeBalancedV2.pow"\par
+\par
+In order to activate it, you have to manually select it by right clicking on the battery in the bottom-right of the screen, click "Power Options", and select "Razer Blade Balanced" from the list of plans. If it doesn't show up, click "Show additional plans" to make it visible.\par
+\par
+If it still doesn't show up, right click on the battery in the bottom right of the screen again, click Windows Mobility Center, and in the Battery Status square choose "Razer Blade Balanced" from the drop-down menu.\par
+\par
+4. Razer Synapse Configuration\par
+\par
+Now we move to configuration of the Razer Synapse tool. I make use of the tool in order to swap between the power plans, and thus I created 2 profiles for it which I use. The profiles can be downloaded from here. In order to import them, open the Razer Synapse program and click the three horizontal dots found under the Select Profile drop-down list and select import, then browse and select them. When plugged in I always use High Performance, and when on battery I always use Energy Efficient. To switch between them, right click the Razer Synapse logo in the notification area of the taskbar (the green Razer logo in bottom right of screen, might only be visible if you click the upwards facing arrow to see more).\par
+\par
+Note: This configuration is a bit more...problematic with the new Windows Power Plans. I recommend in both the profiles, you go in the Synapse tool to the "Power" tab, and in the box titled "Power Control", set them to Battery Saver. What this does is that since on the new Windows Power system there is no "Battery Saver" power-plan built in, Synapse will not continuously auto-swap the active power plan away from whatever one you personally choose to use. When this setting is on "Balanced", every hour or so it will revert whatever power plan you chose manually to the built-in Balanced one.\par
+\par
+5. Network Optimization\par
+\par
+Now we will move to configuring the Killer Networks system. There's a lot of controversy around the card and it's defects, issues, and horrible range, which I'm open to hearing first-hand experiences about. However, from what I can tell and having used it, many of these "issues" (with the exception of the wireless chip entirely "disappearing" from the OS and only coming back after a reboot) seem to be caused more in part by people who knowingly uninstall the Killer Networks drivers and software immediately and don't configure the card at all.\par
+\par
+Download the "Killer Control Center 64-bit" and "Bluetooth for Killer 1535/1525/1435 - Windows 10" from here. Check the site maybe about once every two weeks for updates (I know it sucks, modern software should ALWAYS self-update but eh).\par
+\par
+To begin configuration, launch the Killer Network Manager and go to the Settings. At this point, try and ensure that there is nobody else actively using your internet or network. Click "Set Speed Limits", then press "Test Bandwidth". Ensure that the "Download Speed" and "Upload Speed" values are near the values you are paying for with your internet plan. I cannot stress enough, do NOT just do a speed test and take the values, make sure you know the actual speed you are being provided because values too low will reduce the speed you are able to use. Then press the "Download Latest App Priorities" button, and once it's complete press back. Go to the Applications section now. During the first week or so of using the system, it will take some tweaking but I have some basic recommendations. If you have Steam, set the Steam Client Service and Steam Client WebHelper to "2" priority, and the Steam Client Bootstrapper to "1" priority. Also change Google Chrome to "2" priority for good measure. If you ever have connection or latency issues with a program, then you should raise it to "3" priority, while leaving "1" only for games since it prioritizes those packets in real-time to minimize latency (an effect which doesn't scale well with multiple programs set to highest which are running at the same time).\par
+\par
+Now right click on the WiFi logo in the taskbar and select "Open Network and Sharing Center". To the right of "Connections:", click on "Wi-Fi (YourNetworkName)", then "Properties", then press "Configure" underneath the Killer Wireless-n/a/ac 1535 Wireless Network Adapter and go to the "Advanced" tab. Enable Dynamic MIMO Power Save, set the Preferred Band to "3 - Perfer 5Ghz Band", make sure D0 PacketCoalescing is disabled, set Roaming Aggressiveness to "1.Lowest", and ensure that the Wireless Mode is "12 - 11 a/b/g/n/ac". Now press OK, and close all the windows you just opened.\par
+\par
+6. Graphics Configuration\par
+\par
+Now it's time to configure the video cards. Launch the "Intel Graphics Settings" by searching for it in the search bar. Go to "Power" and in the On Battery section, ensure that "Maximum Battery Life" is selected in both dropdown lists, and that both Panel Self-Refresh and Extended Battery Life for Gaming are enabled. Then go to the Plugged In section and make sure "Maximum Performance" is selected and hit Apply. You can now close the tool.\par
+\par
+Launch the "GeForce Experience" by searching for it in the search bar. Login or create an Nvidia account. Once in the tool, press the cog in the upper-right, to the left of your account's username, and check the "Enable experimental features." box. Run the updates, then go to "DRIVERS" (upper-left of the window, next to "HOME") and run the driver updates. Reboot after this.\par
+\par
+I prefer to always run with Nvidia WhisperMode enabled since it does overall do a good job of limiting fan speeds, but I have noticed that for some games, GTA V in particular, after about 8 hours running in a well ventilated area it starts hitting thermal limits and things get a bit choppy (unusable) from there without giving it some time to cool down.\par
+\par
+If you want the quieter experience of WhisperMode without the frame throttling, right click on the desktop and open the \ldblquote Nvidia Control Panel\rdblquote . On the left side of the window, select \ldblquote Manage 3D settings\rdblquote , go to the program settings tab, select the program you want to remove frame throttling from in the dropdown menu. If the program you want isn't in the list run it then close it and press "Add". Then in the scroll box which shows up in the middle of the window go to the bottom and change \ldblquote WhisperMode FPS\rdblquote  to 60fps from 40fps.\par
+\par
+If you aren\rquote t the kind of person who would ever want to skimp on performance regardless of noise, follow the steps for disabling frame throttling right above this, then also change the setting for \ldblquote Power management mode\rdblquote  to \ldblquote Prefer maximum performance\rdblquote  before hitting apply.\par
+\par
+As of late November 2017, it would appear that the Nvidia GameReady Driver's control panel has an inherent flaw in it's implementation...namely that it keeps a status-bar icon running default which causes the Nvidia graphics card to always be enabled (since all Nvidia programs "onscreen" are rendered exclusively with the Nvidia card). Solution? Right click on the Desktop, select "NVIDIA Control Panel", click on the "Desktop" menubar item in the "Nvidia Control Panel" window, and click on "Show Notification Tray Icon" if there is a checkmark next to it. Another solution (albeit inconvenient) is when on battery to go to the bottom right, right click on the Nvidia logo, and select "Exit" from the menu. This problem appears to be solved. Scratch that, broken again.\par
+\par
+As of late December 2017, the Nvidia GameReady Driver (version 390.65) has yet again an inherent flaw in it's implementation. This time however, the solution is not straightforward. I would personally recommend the following steps: Launch the "GeForce Experience" by searching for it in the search bar. Login or create an Nvidia account. Once in the tool, press the cog in the upper-right, to the left of your account's username, and uncheck the "Enable experimental features." box. Run the updates, then go to "DRIVERS" (upper-left of the window, next to "HOME") and run the driver updates. Reboot after this. Note that you will lose any of the latest optimizations applied to games by Nvidia, but you will at least regain battery life. I will update this guide once the problem is solved, but until then the only other way to get around this is to enter the Task Manager when on battery power and end the processes responsible, namely the "NVDisplay.container.exe" and "RzSynapse.exe" processes.\par
+\par
+Problem appears solved again.\par
+\par
+Problem appears to be happening again. Follow steps in paragraph above that starts with "As of late December 2017".\par
+\par
+7. Overclocking/Underclocking/Undervolting\par
+\par
+The debate rages on about whether people should undervolt their Razer Blade, and I personally have tried it and have not seen much of an improvement overall in fan noise but I still manually undervolt when I'm running portable for productivity-oriented work by -0.100V. In order to do this, I use the Intel Extreme Tuning Utility and MSI Afterburner. Install the Intel XTU, launch it, and select "All Controls" under Advanced Tuning, click OK on the disclaimer, and to undervolt by -0.100V, change the Core Voltage Offset to -0.100V. This is the only safe undervolt I can recommend which will not cause stability issues, though if you try to go further and your system crashes it's fine since Intel XTU has a failsafe which will revert the settings to the base ones after a failure. As for GPU overclocking...well, I don't currently overclock it, but a post on this subreddit about the Razer Blade 2016 which has the same Nvidia GeForce 1060 card and worse thermals said that in MSI Afterburner they could safely raise the Core Clock by +175 and the Memory Clock by +400. Considering the 2017 Razer Blade gets better thermals, this should be well within tolerance but I can't confirm.\par
+\par
+Well, that's all I'm going to include in this guide for now. Criticism, feedback, and recommendations would be greatly appreciated and if there's interest I'm willing to add the rest of the non-standard things I did to configure my Razer Blade. (i.e. Replacing Windows 10 start menu, operating system optimizations, removal of Windows updates, removal of Windows bloatware, driver installations, further optimizations, recommended chroma configuration, etc.)\par
+\par
+EDIT: Some of the sources I used when setting mine up to get a general idea of the device are this reddit post, this reddit checklist for the Razer Blade late-2016 which has the same Nvidia discrete card, and this nice reddit thread about things to know about the Razer Blade 2017. For a guide on some of the stuff I have yet to create a guide for (namely GPU undervolting, BIOS undervolting, and ASPM disabling), there's this posting by /u/Figrin1. I'll just leave these here for people who don't like my guide in particular to save them some time scouring through the subreddit for information.\par
+\par
+EDIT #2: Sooooooooooooo....Just going to stick in here to upgrade Killer drivers and fix up the setting because PINGSPIKES when the Killer card is "roaming" for networks mid game are painful.\par
+\par
+EDIT #3: Just going to stick in some more observations and some corrections since my last edit. I've also had to RMA the system once due to the display panel "unsticking" creating a 3 inch wide grey bar from the top to the bottom of the center of screen. Support did a great job taking care of that, so I personally have no complaints about Razer Support at the moment.\par
+\par
+EDIT #4 (November 23, 2017): Adding some graphics stuff due to some recent Windows and Nvidia driver updates.\par
+\par
+EDIT #5 (December 12, 2017): Cracked the "code" on the recent battery issues. Check Graphics Configuration section for the fix. #BlameNvidia\par
+\par
+EDIT #6 (December 19, 2017): Changed Network Optimization to reflect recommendation found here. Thanks Anthony from the Killer Networking Team!\par
+\par
+EDIT #7 (December 19, 2017 again): Added the ultimate powersaving profile I use personally. Also, I am trying to find a workaround for a second battery offender: Razer Synapse. Synapse now somehow "magically" forces itself onto the Nvidia graphics card regardless of whether it is manually set to always go to integrated. The only way I can find to get around this is to be on battery power in Power Saver and reopen Synapse, at which point it will use the integrated graphics. Without doing this, it keeps the Nvidia card from being able to power down.\par
+\par
+EDIT #8 (December 28, 2017): Turns out importing power profiles with a command makes them unusable for Razer Synapse profiles without some command line voodoo, so for now I'll just leave a giant disclaimer to ignore that as a viable alternative to manually changing the settings until I figure out a way around that.\par
+\par
+EDIT #9 (January 2, 2018): Cleaned up a little bit. I will soon be adding some more power configuration tweaks to get the absolute most out of the Blade's battery and a section for dealing with issues caused by the Windows 10 Fall Creators Update.\par
+\par
+EDIT #10 (January 4, 2018): Updated the link for the Samsung NVMe driver. Thanks for the feedback /u/just_a_bud !\par
+\par
+EDIT #11 (January 6, 2018): Made some corrections to the Graphics Configuration section, removing the Nvidia bug which has since been corrected and fixing some semantics.\par
+\par
+EDIT #12 (January 13, 2018): Completely rebuilt and updated the Maximum Powersaver Plan. It is now 100% effective at getting the most juice out of the system, without compromising for no reason (like disabling 4 cores for the illusion of saving power...). Also re-added the Nvidia bug to the Graphics Configuration section due to it's being reintroduced in the latest experimental driver package. Changed some wording in the Overclocking/Underclocking/Undervolting section, and added a link to another person's guide.\par
+\par
+EDIT #13 (January 16, 2018): Added Intel Integrated Graphics drivers installation to Updating the System section\par
+\par
+EDIT #14 (January 18, 2018): Cleaned up a little bit more. I will soon add a section on Nice-To-Haves and possibly a section on known issues and their solutions.\par
+\par
+EDIT #15 (January 31, 2018): Today my Razer Blade failed. I am uncertain of the cause, but it could have been related to the Razer Orochi which was connected to the device at the time. Support has been contacted and are taking care of the issue. I will ask to make sure it's not improper but hope to post the transcript to show that Razer Support isn't the nightmare that people claim it is.\par
+\par
+EDIT #16 (February 7, 2018): Corrected Power Configuration section to account for Windows Fall Creators Update.\par
+\par
+On a side note, it\rquote s a shame Reddit marked this as archived.\par
+\par
+EDIT #17 (March 13, 2018): I got my system back from an RMA recently and am going to be updating the guide soon to account for some breaking changes in the latest Windows updates. Until then, I recommend not updating to anything past the initial Fall Creators Update package. Feel free to update to the latest updates, the situation seems to have gotten better.\par
+\par
+EDIT #18 (April 8, 2018): The mouse-stuttering issue may finally be solved! Intel has reported that in their latest driver release they have patched dedicated graphics switching with integrated graphics. I have updated the Intel Graphics Drivers link to point to this updated and fixed version of the driver.\par
+\par
+EDIT #19 (April 18, 2018): Removed Nvidia and Windows Updates recommendations/disclaimers. Please note that the comments are worth a read, especially for RBS owners.\par
+\par
+EDIT #20 (May 10, 2018): Added the Experimental V2 Ultimate Razer Blade 2017 Balanced Power Plan to the guide, based on results from the comment posted here. Also started updating the guide to account for major changes to the Windows operating system and how it interacts with Synapse. The Nvidia Graphics issue with Synapse appears to be be back too and that section has been updated accordingly. The commands for importing the power plans have needed a correction because Reddit now hides the first "" before a "(" since it assumes the author wants to use it to "escape" the character.\par
+\par
+EDIT #21 (May 29, 2019): Updated link for the Maximum Power Saver Power Plan.\par
+}
+ 

@@ -1,0 +1,1 @@
+System -> Advanced system settings (System Properties) -> Environment variables -> double click on path -> add

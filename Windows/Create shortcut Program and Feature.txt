@@ -1,0 +1,2 @@
+Right click -> new -> shortcut
+In the location of the item type: C:\Windows\System32\appwiz.cpl

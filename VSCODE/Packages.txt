@@ -1,0 +1,8 @@
+ES7 React/Redux/GraphQL/React-Native snippets
+Beautify
+Prettier - Code formatter
+DotENV
+ESLint
+Live Share
+Live Server
+Visual Studio Intellicode

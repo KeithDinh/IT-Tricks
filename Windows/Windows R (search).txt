@@ -1,0 +1,3 @@
+dxdiag: laptop spec
+sysdm.cpl: system properties, env var
+regedit: regedit

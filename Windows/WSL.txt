@@ -1,0 +1,26 @@
+
+***READ: You cannot copy files to the root directory of Ubuntu, It will not recognize the files
+		 You have to use the path to Windows: cd /mnt/c/Users
+
+
+Method 1:
+Windows Update Settings -> For Developers -> Check the radio Developer Mode
+
+Control Panel -> Program -> Under Program and Features -> Turn Windows features on and off
+
+Restart 
+
+Microsoft Store -> install Ubuntu -> setup local account
+
+Path of root: C:\Users\kietd\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs\home\kietdinh1995\
+
+Method 2:
+Settings -> Update and security -> locate For Developer -> Developer Mode
+Windows Features -> check Windows Subsystem for Linux
+
+
+
+
+Turn off the bell sounds
+	sudo vim /etc/inputrc (password: your windows user account)
+	set bell-style none

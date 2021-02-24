@@ -1,0 +1,1 @@
+using balena etcher to turn flash drive into bootable drive

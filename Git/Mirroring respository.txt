@@ -1,0 +1,55 @@
+To duplicate a repository without forking it, you can run a special clone command, then mirror-push to the new repository.
+
+Before you can duplicate a repository and push to your new copy, or mirror, of the repository, you must create the new repository on GitHub. In these examples, exampleuser/new-repository or exampleuser/mirrored are the mirrors.
+
+********************************************* Mirroring a repository ********************************************* 
+
+Open Git Bash > Create a bare clone of the repository: 
+$ git clone --bare https://github.com/exampleuser/old-repository.git
+
+> Mirror-push to the new repository:
+$ cd old-repository.git
+$ git push --mirror https://github.com/exampleuser/new-repository.git
+
+>Remove the temporary local repository you created in step 1.
+
+$ cd ..
+$ rm -rf old-repository.git
+
+********************************************* Mirroring a repository that contains Git Large File Storage objects *********************************************
+Open Git Bash.
+
+Create a bare clone of the repository. Replace the example username with the name of the person or organization who owns the repository, and replace the example repository name with the name of the repository you'd like to duplicate.
+$ git clone --bare https://github.com/exampleuser/old-repository.git
+
+Navigate to the repository you just cloned.
+$ cd old-repository.git
+
+Pull in the repository's Git Large File Storage objects.
+$ git lfs fetch --all
+
+Mirror-push to the new repository  
+$ git push --mirror https://github.com/exampleuser/new-repository.git
+
+Push the repository's Git Large File Storage objects to your mirror.
+$ git lfs push --all https://github.com/exampleuser/new-repository.git
+
+Remove the temporary local repository you created in step 1.
+$ cd ..
+$ rm -rf old-repository.git
+
+********************************************* Mirroring a repository in another location *********************************************
+If you want to mirror a repository in another location, including getting updates from the original, you can clone a mirror and periodically push the changes.
+
+Open Git Bash.
+
+Create a bare mirrored clone of the repository.
+$ git clone --mirror https://github.com/exampleuser/repository-to-mirror.git
+
+Set the push location to your mirror.
+$ cd repository-to-mirror.git
+$ git remote set-url --push origin https://github.com/exampleuser/mirrored
+
+As with a bare clone, a mirrored clone includes all remote branches and tags, but all local references will be overwritten each time you fetch, so it will always be the same as the original repository. Setting the URL for pushes simplifies pushing to your mirror. To update your mirror, fetch updates and push.
+$ git fetch -p origin
+$ git push --mirror

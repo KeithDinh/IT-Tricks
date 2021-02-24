@@ -1,0 +1,8 @@
+Set up env variables
+
+change all the paths to:
+C:\Users\username\anaconda3\envs\myenv
+C:\Users\username\anaconda3\envs\myenv\Library\mingw-w64\bin
+C:\Users\username\anaconda3\envs\myenv\Library\usr\bin
+C:\Users\username\anaconda3\envs\myenv\Library\bin
+C:\Users\kietd\anaconda3\envs\myenv\Scripts

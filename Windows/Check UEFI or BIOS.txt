@@ -1,0 +1,1 @@
+Run - msinfo32 - scroll down to BIOS Mode

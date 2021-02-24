@@ -1,0 +1,18 @@
+// c/users/[account] 
+heroku login
+
+// install gunicorn
+
+// Open terminal in project folder
+// create "Procfile" (no tail or extension)
+web: gunicorn mysite.wsgi:application --log-file - --log-level debug
+
+
+// file settings:
+ALLOWED_HOSTS = ['crypto-currency-network.herokuapp.com','127.0.0.1']
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'mysite/static/')]
+
+// update the lastest requirements.txt
+
+// heroku run python manage.py migrate

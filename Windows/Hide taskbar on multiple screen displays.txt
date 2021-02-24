@@ -1,0 +1,1 @@
+right click taskbar -> taskbar settings -> multiple displays -> off

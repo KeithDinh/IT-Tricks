@@ -1,0 +1,25 @@
+
+WINDOW
+1. Local Group Policy Editor -> Computer Configuration -> Administrative Templates ->System
+	-> Device Guard -> Turn On Virtualization Based Security -> Disabled -> Apply
+
+
+
+EXTRA: 
+2. In search box type "gpedit" then Goto  - Computer Configuration - Administrative Templates - System - Device Guard - Turn on Virtualization Based Security. Now Double click that and "Disable"
+
+3. In search box, type Turn Windows features on or off, now uncheck Hyper-V and restart system.
+
+4. Open Registry Editor by typing regedit in search box, now Go to HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\DeviceGuard. Add a new DWORD value named EnableVirtualizationBasedSecurity and set it to 0 to disable it.
+Next Go to HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\LSA.  Add a new DWORD value named LsaCfgFlags and set it to 0 to disable it.
+
+5. Open command prompt as a administrator and type the following commands  
+bcdedit /create {0cb3b571-2f2e-4343-a879-d86a476d7215} /d "DebugTool" /application osloader
+
+Then copy paste the rest below and press enter
+bcdedit /set {0cb3b571-2f2e-4343-a879-d86a476d7215} path "\EFI\Microsoft\Boot\SecConfig.efi"
+bcdedit /set {bootmgr} bootsequence {0cb3b571-2f2e-4343-a879-d86a476d7215}
+bcdedit /set {0cb3b571-2f2e-4343-a879-d86a476d7215} loadoptions DISABLE-LSA-ISO,DISABLE-VBS
+bcdedit /set hypervisorlaunchtype off
+
+Now, Restart your system

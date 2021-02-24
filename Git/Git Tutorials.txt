@@ -1,0 +1,88 @@
+$branch_name = your branch name
+$file_name = your file name
+
+Git status
+	git status
+	git status -u // list all modified/untracked files
+
+Remove changes/ modification
+	git restore
+
+Git commit
+	git commit -m [message] // commit change with message
+	git commit -am [message] // auto add only modified files (not include untracked files) and commit with message 
+
+Rename commit
+	git commit --amend (then it will prompt a window to change the commit message)
+	git push --force (optional: [branch])
+
+First time push to 
+	git push --set-upstream origin branch_name
+
+Git Branch
+	// list all branches
+	git branch -a
+	// select a branch
+	git checkout branch_name
+	// create new branch
+	git checkout -b branch_name
+	// Push a new branch
+	git push --set-upstream origin branch_name
+	// delete a branch locally (Can't delete if in the same branch)
+	git branch -d branch_name
+	// delete a branch locally and remotely (Can't delete if in the same branch)
+	git branch -d branch_name
+	git push --delete origin branch_name
+	// git clone specific branch
+	git clone -b branch_name --single-branch https://github.com/username/Name
+
+Git reset 
+	git reset --hard origin/$branch_name
+
+$ git remote add origin remote [repository URL]
+
+git remote remove [name] (ex: origin)
+
+Git Stop Tracking a File/Folder. This doesn't remove the file in the folder
+	
+	git rm [filename.extension] --cached
+	git rm -r --cached <folder>
+
+	git commit -m "something" && git push
+	
+Git Log Out
+	git config --global --unset-all
+	OR
+	git config --global --unset user.name
+	git config --global --unset user.email
+	git config --global --unset credential.helper
+
+Rename Branch
+	git checkout old_branch_name
+	git branch -m new_branch_name
+	git push origin -m new_branch-name
+	git push origin --delete old_branch_name
+
+Git Stash
+	git stash save “Your stash message”
+	// stashing untracked files
+	git stash save -u or git stash save --include-untracked
+	// list all saved stash
+	git stash list
+	// switch to save stash
+	git stash apply stash@{1}
+	// delete latest stash
+	git stash drop stash@{1}
+	// switch to save stash and pop
+	git stash pop stash@{1}	
+	// show changes
+	git stash show 
+	// show full diff
+	git stash show -p
+	// create new branch with latest stash, and dleete the latest stash
+	git stash branch <name> stash@{1}
+	// clear all 
+	git stash clear
+
+Git Patch: 
+A patch is a small file that indicates the changes made in a repository. It's generally used when someone from outside your team has read-only access but had a good code change available. He then creates a patch and sends it to you. You apply it and push it to the git repository. Everyone then benefits from the updated version, and the author of the patch didn't need read/write access

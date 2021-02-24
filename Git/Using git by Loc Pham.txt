@@ -1,0 +1,434 @@
+..Ubuntu
+ -Cấp quyền liên tục: 
+	sudo gedit /etc/apache2/envvars
+ -zsh config:
+	nano .zshrc
+
+..Php version
+yum -y install php72u-pdo php72u-mysqlnd php72u-opcache php72u-xml php72u-gd php72u-devel php72u-mysql php72u-intl php72u-mbstring php72u-bcmath php72u-json php72u-iconv php72u-soap
+
+
+..fix lỗi phpstorm
+lỗi lỡ enter mà chưa đặt .php setting->editor kiếm file php hoặc text -> xóa cái tên file đi.
+
+..Git
+
+ -bỏ theo dõi thay đổi file
+git checkout -- <file> (.idea)
+
+bash deploy.sh
+cd app/code/Magenest/CustomerAttributes
+git pull origin develop
+cd ../../../../
+
+php bin/magento c:c
+php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+php bin/magento setup:static-content:deploy -f
+php bin/magento indexer:reindex
+
+ -Trường hợp 2 người k làm chung 1 project (hoặc repository) vẫn muốn làm dùm nhau.
+ Sau khi người A đã code dùm người B 1 vài file mà người A k có trong repo dự án đó:
+  + Người A:
+	git add <các file đã làm>
+	git commit -m "<các viêc đã làm trên nhánh đó>"
+	(lưu ý k push)
+	git format-patch -1 HEAD (tạo 1 file patch từ HEAD, file patch sẽ lưu vào root của repository git)
+	sau đó gửi người B
+  + Người B:
+	Lấy file patch của người A gửi import vào nhánh cần làm:
+	git apply <đường dẫn vào file patch>
+
+ -Bỏ qua thay đổi 1 file:
+git update-index --assume-unchanged app/etc/config.php
+
+ -checkout ve nhanh truoc
+git checkout <develop,master,..>
+
+ -thu tuc commit
+git add *
+git commit -m "<code: (task's name)>"
+
+ -exp:
+git checkout <branch>
+git add *
+git commit -m "<code_project>: <title_project>"
+git push
+
+ -Sua commit neu chua merge
+git commit --amend -m "<code_project>: <title_project>"
+git push -f
+
+ -Clone git project
+git clone
+
+ -Git stash:
+ vd muốn  lưu nhưng thay đổi của nhánh này qua nhánh khác
+ 	đầu tiên nên là git stash save để lưu những thay đổ->checkout nhánh mới git stash pop
+
+- Doi ten nhanh ne:
++ dang o nhanh can doi
+git branch -m newName
++ khac nhanh
+git branch -m oldName newName
+
+ -lui ve 1 commit tu Head 
+git reset --soft HEAD~1
+
+ -lay toan bo nhanh moi khi bi conflic
+git fetch --all
+git reset --hard origin/nhánh
+git pull origin nhánh
+
+ -git rebase
+rebase để gắn 1 nhánh có code tiếp theo nhánh cần rebase vd:
++ tại nhánh LA-009:
+git add .
+git commit -m "LA-009: abc"
+git rebase origin/develop
+git push -f
+nhánh LA-009 sẽ cắm lên nhánh develop.
+
+ -git rebase -i HEAD~n
+lấy toàn bộ thông tin các commit tính từ HEAD tới n
+reword: thay đổi tên commit,
+drop: bỏ commit nhưng không thay đổi code,
+
+ -khi file bị báo thay đổi xl vì permission:
+git config core.fileMode false
+
+ -giao tiếp file local với demo: 2 cách.
+sử dụng filezila: sử dụng key-file để connect
+sử dụng scp.
+
+ssh -i /home/loc/Downloads/id_customerattribute.pem customerattribute@izysync.com
+ssh -i /home/loc/Downloads/Demo/id_liena.pem liena@izysync.com
+
+..Project
+- Tạo admin
+php bin/magento admin:user:create --admin-user="loc" --admin-password="0918104489Loc" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin"
+php bin/magento admin:user:create --admin-user="phamlocvietnam@gmail.com" --admin-password="0918104489Loc" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin"
+php bin/magento admin:user:create --admin-user="admin" --admin-password="admin@123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin"
+
+php bin/magento dev:urn-catalog:generate .idea/misc.xml
+
+------------------------------------------------------------------------------------------------
+..Tech
+ -\Magento\Reward\Model\RewardFactory $rewardFactory
+
+ -db_schema.xml generate whitelist:
+php bin/magento setup:db-declaration:generate-whitelist --module-name=DrinkiesLocal_SourceAutoSelection
+ 
+ - dynamically adding products to the cart in Magento2 with some custom options. Every product has the same base product id with different options. Thêm nhiều sản phẩm vào cart với nhiều custom option sử dụng repository:
+	$this->productRepository->get('simple-product-1', false, null, true);
+						//với true là forceReload
+	Nguồn: https://magento.stackexchange.com/questions/229499/why-does-the-second-product-dynamically-added-to-the-cart-lose-its-options-in-ma
+
+
+ -php bin/magento dev-query-log:
+Loadout table has been loaded, can be checked in var/log/debug/
+
+ -php bin/magento d:p:e :
+Loadout in page times of page loading(Ajax,Page Load, etc) can be check page cache.
+
+ -Debug:
+https://xdebug.org/wizard
+Để debug vào file trong folder Setup theo CLI thì lúc đầu vào "sudo nano /etc/php/7.1/cli/php.ini" với <7.1> là version php. Sau đó chỉnh "xdebug.remote_autostart=" thành 1 sau khi cần debug sau chuyển thành 0.
+
+ -setData & addData
+setData : $_data = array('k1' => 'v1' , 'k2' => 'v2', 'k3'=>'v3'); add more key 'k3','v3'
+	  $_data = array('k3'=>'v3'); override data w/ array('k3'=>'v3') | override key and value
+addData : $_data = array('k1' => 'v1' , 'k2' => 'v2', 'k3'=>'v3'); add more with array('k3'=>'v3')
+	  $_data = array('k1' => 'v1' , 'k2' => 'v2000'); override value w/ key array('k2'=>'v2000') | override value with key
+
+ -kiểu dữ liệu static là kiểu dữ liệu do magento tạo mặc định hầu như không thể thay đổi nên mỗi lần tạo attribute gần giống với kiểu dữ liệu đó thì phải check
+
+ -tag <reference> trong di thay đổi toàn bộ web bằng xử lý trong type đó, nếu muốn sử dụng type đó trên từng file thì dùng tag <type>
+vd: <type name="Magenest\CustomerAttributes\Block\Account\Additional">
+        <arguments>
+            <argument name="serializer" xsi:type="object">Magento\Framework\Serialize\Serializer\Serialize</argument>
+        </arguments>
+    </type>
+
+ -jquery get value in select tag 
+$('select[name="custom[select_152]"]').val()
+
+ -jquery one vs on
+	var i = 1;
+	$('.one').one('click', function() {
+
+	  $(this).text('I am clickable only once: ' + i);
+	  i++;
+	});
+ one chỉ trigger event đó 1 lần
+ on là one nhưng trigger event ko giới hạn.
+ 
+-json
+json_encode: chuyen array thanh chuoi json
+json_decode: chuyen chuoi json thanh array.
+\Magento\Framework\Controller\Result\Json $json chuẩn nhất về việc chuyển dữ liệu từ php về ajax trong phần .done(function (jsonResponse) {});
+
+ -redirect
+Dinh huong url
+ -forward
+giong redirect nhung khong thay doi url
+
+ -custom form set value
+$form->setValues($data);
+
+ -isset empty is_null
+isset — Determine if a variable *is set and is not NULL*
+empty — Determine whether a variable *is empty*
+is_null — Finds whether a variable *is NULL*
+
+ -customer group chi duoc admin set
+
+ -language pack: tải file <gido>.csv, tạo folder app/i18n/vendor/<gido>. Tạo các file composer.json, registration.php, language.xml, paste file <gido>.csv
+Chạy các lệnh: php bin/magento i18n:pack 'app/i18n/liena/vi_VN/vi_VN.csv' -d vi_VN
+	       php bin/magento setup:upgrade
+	       php bin/magento setup:static-content:deploy <gido>
+	       php bin/magento cache:clean
+	       php bin/magento cache:flush
+..Use
+
+ -use Magento\Customer\Api\CustomerRepositoryInterface; 
+CustomerRepository
+ 
+ -trong observer events khong co request de goi dau
+dung cai nay dum : use Magento\Framework\App\RequestInterface;
+ - Event để check và thay đổi render của 1 layout: layout_load_before 
+	với $observer->getFullActionName() <lấy tên layout>
+		$layout = $observer->getLayout(); <lấy layout hiện tại>
+            	$layout->getUpdate()->addHandle(<tên layout cần custom thêm vào>); custom layout có thể do mình tự tạo vào add các block thậm chí là include các file khác nhau vào js vào
+..Cron
+ 1/ crongroup.xml: 
+	<group id="<tên group>">
+		<schedule_generate_every>1</schedule_generate_every>
+		<schedule_ahead_for>4</schedule_ahead_for>
+		<schedule_lifetime>2</schedule_lifetime>
+		<history_cleanup_every>10</history_cleanup_every>
+		<history_success_lifetime>60</history_success_lifetime>
+		<history_failure_lifetime>600</history_failure_lifetime>
+		<use_separate_process>1</use_separate_process>
+    	</group> 
+ 2/ crontab.xml
+	<group id="<tên group>"
+		<job name="<tên job>" instance="DrinkiesLocal\RewardExtended\Cron\ForceCancelOrderPending" (<file thực thi cronjob>) method="execute">
+		    <schedule>* * * * *</schedule>
+		</job>
+    	</group>
+ 3/ php bin/magento cron:install
+ 4/ php bin/magento cron:run --group="<tên group>"
+
+..Model
+ -trong trường hợp chưa có repository để load thì dùng load của resourceModel vd:
+	use Magento/Customer/Model/ResourceModel/CustomerFactory $customerResourceModelFactory;
+	gọi model cần dùng ở đây là model của customer: Magento/Customer/Model/CustomerFactory $customerModelFactory;
+	$customerModelFactory = $this->customerModelFactory->create
+	$customerResourceModelFactory = $this->customerResourceModelFactory->create();
+	$customerResourceModelFactory->load($customerModelFactory <ở đây là param model>, $customerId <entity_id điền vào>, <field cuối này là primarykey của bảng>)
+	thì model <customerModelFactory> được truyền ở param đầu sẽ nhận data được load từ bảng với <entity_id> truyền vào ở  param 2.
+
+
+..Magento
+ .System.xml:
+	có thể <depend> nhiều field
+	để <depend> giá trị của 1 field trong nhiều group chồng chất nhau vd: payment/secure_trading/payment_pages/payment_requrired/is_test.
+		field cần depend:  payment/secure_trading/payment_pages/payment_optional/jwt_name.
+	thì viết như sau <depend>*/*/*/payment_required/is_test</depend>
+	các dấu * là viết lại của các section và group giống nhau của 2 field.
+
+ -Session handler line 22: 
+		'session' =>
+			array (
+			'save' => 'files',
+			'save_path' => '/var/www/magento2/var/session',
+			),
+  .UiComponent:
+ -add them cot o customer_grid : customer_grid duoc generate tu bang customer_grid_flat
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="adminhtml_customer_attribute_listing_data_source" xsi:type="string">Magenest\CustomerAttributes\Model\ResourceModel\Attributes\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+  -uicomponent bodyTmpl preparedatasource trong class
+Them "&"truoc $item luu gia tri
+
+  -lỗi lặp data khi paging(phân trang)
+	    <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">movie_id</item>
+                    </item>
+                </item>
+            </argument>
+
+  .Checkout
+ -them field trong checkout
+khai bao plugin trong di.xml Magento\Checkout\Block\Checkout\LayoutProcessor
+goi function afterProcess
+ex với shipping step: $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
+            ['shippingAddress']['children']['before-form']['children']["'custom-attribute-" . $option['attribute_id'] . "'"] = [
+                'component' => 'Magento_Ui/js/form/element/select',
+                'config' => [
+                    'customScope' => 'shippingAddress',
+                    'template' => 'ui/form/field',
+                    'elementTmpl' => 'ui/form/element/select',
+                    'id' => '"custom-attribute-".$option["attribute_id"]'
+		    //với kiểu checkbox set sẽ có <'options' => $optionvalue>,
+						<'value' => $optionvalue[0]['value']>
+                ],
+                'dataScope' => 'shippingAddress.custom-attribute-' . $option["attribute_id"],
+                'label' => 'Custom Attribute ' . $option["attribute_id"],
+                'provider' => 'checkoutProvider',
+                'visible' => true,
+                'validation' => [],
+                'sortOrder' => 200,
+                'id' => 'custom-attribute-' . $option["attribute_id"],
+                //voi kieu select va multiselect se co <'options' => $optionvalue>,
+            ];
+
+        $group[] = [
+            'component' => 'Magento_Ui/js/form/components/group',
+            'required' => false,
+            'dataScope' => 'shippingAddress.custom-attribute',
+            'provider' => 'checkoutProvider',
+            'sortOrder' => 70,
+            'type' => 'group',
+            'id' => 'custom-attribute-group',
+            'children' => $children
+            ];
+
+$jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']
+                    ['payment']['children']['beforeMethods']['children']['custom-checkout-form-container'] : billing step before/after Payment Method.
+
+['shipping-address-fieldset']['children'] them fielset vao checkout thay the ['before-form']['children']
+['billing-step']['children']['payment']['children']['payments-list']['children']['before-place-order']['children'] : billing step
+voi moi ptu trong mang jslayout la 1 tag trong checkout_index_index.xml
+
+với field select muốn có default value thì add value trong mục 'config' vd: $children[$count]['config'] += ['value' => $checkedSelectValue];
+
+option của children khi truyền vào sẽ là giá trị của this.options trong các form field được tạo lên bởi file javascript và html.
+
+ -Xử lý với <collection>
+$collection->addFieldToFilter(<cột cần lấy> vd: "customerID",<condition> vd: "19"). lấy dữ liệu của collection có điều kiện
+
+ -list exception: 
+https://magento.stackexchange.com/questions/237425/exception-usage-in-magento2
+
+..Widget:
+ - Widgets provide powerful features in Magento 2, that are used to add dynamic or static content to store’s pages. Here are the widgets that are available by default:
+	CMS Page Link
+	CMS Static Block
+	Catalog Category Link
+	Catalog New Products List
+	Catalog Product Link
+	Catalog Products List
+	Orders and Returns
+	Recently Compared Products
+	Recently Viewed Products
+ - As a parameter, we are able to use any of these field types:
+	text
+	select
+	multiselect
+	block
+
+ - có thẻ tạo 1 block chứa nhiều widget:
+  B1: tạo 1 widget render 1 cái gì đó (product, category, ....).
+  B2: vào content->block kẹp widget đó vào.
+  B3: tạo widget với cms static block chọn nơi render.
+
+
+------------------------------------------------------------------------------------------------
+..Loi thuong gap 
+ -ko generated : rm -rf generated/
+vd thuong gap: too few param pass construct
+
+------------------------------------------------------------------------------------------------
+..JS
+
+ -Magento_Ui/js/model/messageList 
+	messageList.addErrorMessage({message: err.statusText});
+
+ -this._super()<JS> = construct<php> nếu ko có cái này thì function mới tạo trùng tên với function cũ sẽ ghi đè lên mà ko phải là extend 
+
+ -knockoutjs foreach: <!-- ko foreach: getMultiImages($row()) -->
+    			<img class="admin__control-thumbnail" attr="src: $data"/>
+		      <!--/ko-->
+			với GetMultiImages() là hàm được viết trong file component .js vd <thumbnail.js>
+			    $row() là 1 cái biến observable được imports ở đâu đó :D đại khái là value của cái dòng đó truyền vào function getMultiImages()
+			    $data ở property attr là từng giá trị được foreach ở function getMultiImages()
+			Function getMultiImages() sẽ trả về 1 Array và sẽ foreach ở biến $data (biến $data này có thể chuyển thành giá trị khác - không nhất thiết là $data).
+
+ -knockoutjs if: <!-- ko if: checkIsLoggedIn()-->
+			<p>what the fuck?</p>
+		<!-- /ko -->
+			Với checkIsLoggedIn() là hàm được viết trong file component .js vd <secure-trading.js>
+			Function checkIsLoggedIn() sẽ trả về giá trị true hoặc false. nếu trả về true thì đoạn thẻ <p> kia sẽ load ra false thì ko load
+			(?) giả sử giá trị trả về ko phải là true false mà là 1 giá trị khác thì sao? //todo	 			
+
+ -vào definition.xml kiếm component của field để  extend.
+ 
+ -cai knockout context -> bat f12 -> inspect -> kiem name cua element -> su dung registry de get -> lam gi do thi lam
+
+ -knockoutjs exports get full name -> console: require('ko').contextFor($0).$data.name (name có thể là <value>,<input>,etc nói chung là properties).
+
+ -knockoutjs : subscribe dựa theo 1 biến observable để chạy function mà nó tạo ra.
+		vd:
+		var simpleObject = ko.observable('i am pretty simple');
+		    simpleObject.subscribe(function (newValue) {
+			document.getElementById('simpleSubscribtionFeedback').innerText = newValue;
+		    });
+
+ -uiRegistry.get('index = multiselect', function (element) { -------------------->element ở đây sẽ là các property của index = multiselect ở trước
+                if (value == 'multiselect') {
+                    element.visible(true);
+                } else {
+                    if(typeof element != 'undefined')
+                        element.visible(false);
+                }
+            });
+
+ -build base url+duong dan : mage/url - exp: url.build('customer/customer_checkout/save')
+ -document.ready = 'domReady!'
+ -x-magento-init : gọi trong phtml->truyền dữ liệu kiểu "Pulsestorm_JavascriptInitTutorial/example":{"config":"value"} //với Pulsestorm_JavascriptInitTutorial/example là file javascript sẽ xử lý dữ liệu nhận được và thực hiện nó trong file phtml vd: https://alanstorm.com/magento_2_javascript_init_scripts/
+ -các kiểu component đi kèm thông dụng: với <key> là component xử lý và <value> là template 
+	public function getComponent($optiontype)
+	    {
+		switch ($optiontype)
+		{
+		    case 'text': return ['Magento_Ui/js/form/element/abstract' => 'ui/form/element/input'];break;
+		    case 'select': return ['Magenest_CustomerAttributes/js/checkout' => 'ui/form/element/' . $optiontype];break;
+		    case 'multiselect': return ['Magenest_CustomerAttributes/js/form/element/multiselect' => 'Magenest_CustomerAttributes/form/element/multiselect'];break;
+		    case 'textarea': return ['Magento_Ui/js/form/element/' . $optiontype => 'ui/form/element/' . $optiontype];break;
+		    case 'date': return ['Magento_Ui/js/form/element/' . $optiontype => 'ui/form/element/' . $optiontype];break;
+		    case 'multiselectwithimages': return ['Magenest_CustomerAttributes/js/form/element/multiselectwithimages' => 'Magenest_CustomerAttributes/form/element/multiselectwithimages'];break;
+		    case 'singleradioimage': return ['Magento_Ui/js/form/element/checkbox-set' => 'Magenest_CustomerAttributes/form/element/checkbox-set'] ;break;
+		    case 'boolean': return ['Magento_Ui/js/form/element/select' => 'ui/form/element/select'];break;
+		}
+	    }
+
+  .Plugin(important) với beforeFunction() có nhiêu param thì cứ gắn hết vào, xử lý dữ liệu trước khi chạy vào hàm original
+		    với aroundFunction(<tên class> $subject, <phuong thuc callback,call,\Closure> $proceed, $param_truyen_tu_ham_can_plugin) (nên ghi lại các param đã tham gia function)
+			VỀ CƠ BẢN THÌ AROUND ẢNH HƯỞNG ĐẾN VIỆC THỰC THI FUNCTION ĐÓ
+			function getReport() sẽ có cách để không hoặc được thực thi nhờ vào plugin function aroundGetProduct();
+				(around sẽ thực thi bằng cách lấy biến truyền vào proceed như $proceed($param_truyen_...) để trả về 1 kết quả như việc thực thi hàm đang plugin vd aroundGetReport thì $proceed($param_truyen_...) là gọi getReport().
+		    với afterFunction(tên class> $subject, result, param1, param2 ,..) (nên thêm tất cả param)
+			VỀ CƠ BẢN THÌ AFTER ẢNH HƯỞNG ĐẾN LUỒNG DỮ LIỆU HOẶC THỰC THI 1 CÁI GÌ ĐÓ SAU KHI HÀM ĐÓ DIỄN RA CÓ PARAM
+			 "result" là kết quả trả về của function bị plugin 
+	vd: function getReport() sau khi diễn ra sẽ chạy hàm afterGetReport($subject,$result) $result là kết quả trả về của getReport() 
+ 
+  .FormField:
+ -div trong form phtml
+FE:<div> class="field <required>"
+   <label> class="label"
+   <input> class="input-text <select,textarea,etc...>"
+BE: <div> class="admin__field <_required>"
+    <label> class="admin__field-label"
+    <div> class="admin__field-control"
+    <input> class="admin__control-text <select,textarea,etc...>" --- trong BE thì nhớ có attribute data-form để submit được data từ field đó nhé :D
+

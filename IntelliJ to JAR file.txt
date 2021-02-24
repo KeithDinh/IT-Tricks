@@ -1,0 +1,4 @@
+IntelliJ IDEA
+
+Ctrl + Shift + Alt + S -> artifacts -> + -> all dependencies -> choose main -> apply, ok 
+Build -> Build artifacts

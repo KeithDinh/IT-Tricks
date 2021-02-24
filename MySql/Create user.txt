@@ -1,0 +1,5 @@
+SQL > CREATE USER 'kiet'@'localhost' IDENTIFIED BY 'Dinhkiet';
+
+SQL > GRANT ALL PRIVILEGES ON *.* TO 'kiet'@'localhost';
+
+SQL > SELECT user FROM mysql.user;

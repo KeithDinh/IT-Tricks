@@ -1,0 +1,25 @@
+Ctrl:
+A: select all
+B: toggle side bar
+D: press once will select current word, press multiple times will select next occurrences of word
+L: select line
+P: go to file
+W: close current tab
+1,2,3: switch splitscreen panels
+
+Space: show info/suggestions
+`: terminal
+
+Ctrl K, then Ctrl Shift S: save without formatting
+Ctrl K, then 0: seperate tab into new window
+
+Ctrl+Shift:
+P: select extension or settings
+Down arrow: copy current line
+
+Alt: 
+hold and click to select multiple lines
+hold and move up down to move line up down
+1,2,3: switch tabs in current panel
+
+Shift+Command/Ctrl+L: Select all instances of a word

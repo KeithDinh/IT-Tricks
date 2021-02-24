@@ -1,0 +1,13 @@
+	Step 1: remove the partition on Windows
+start -> disk management 
+right click and delete volume the partition
+right click on C: and extend volume (keep pressing Yes)
+	Step 2: delete the grub on linux (the root)
+window-command prompt -> diskpart -> list disk -> select disk 0(normally) 
+list partition -> assign letter=x -> exit (off diskpart window) 
+open command prompt by administrator 
+cd C:\Windows\system32\x: or cd \
+dir -> cd efi -> dir -> rd ubuntu /s -> Y -> restart
+	Step grub rescue: 
+When power on press F10 (or F12) to boot into BIOS, then search for OS management 
+Set Windows as the first priority, SAVE, the exit and save and boot normally to windows
