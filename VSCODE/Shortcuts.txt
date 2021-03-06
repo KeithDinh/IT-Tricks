@@ -9,17 +9,25 @@ W: close current tab
 
 Space: show info/suggestions
 `: terminal
+----------------------------------------------------------------------------
+Ctrl + Alt + Arrows: Select multiple line to type
 
-Ctrl K, then Ctrl Shift S: save without formatting
-Ctrl K, then 0: seperate tab into new window
+----------------------------------------------------------------------------
 
 Ctrl+Shift:
 P: select extension or settings
 Down arrow: copy current line
 
+----------------------------------------------------------------------------
+
+Ctrl K, then Ctrl Shift S: save without formatting
+Ctrl K, then O (not 0): seperate tab into new window
+----------------------------------------------------------------------------
 Alt: 
 hold and click to select multiple lines
 hold and move up down to move line up down
 1,2,3: switch tabs in current panel
 
 Shift+Command/Ctrl+L: Select all instances of a word
+
+
