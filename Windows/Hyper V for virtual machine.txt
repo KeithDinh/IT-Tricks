@@ -1,0 +1,2 @@
+Method 1: Cmd: bcdedit /set hypervisorlaunchtype off
+Method 2: Control Panel -> Program and Features -> Turn Windows features on or off -> Hyper V
