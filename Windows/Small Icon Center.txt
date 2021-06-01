@@ -1,0 +1,6 @@
+Right Click Task bar -> toolbars -> activate link
+unlock task bar
+drag link from right to all the way left
+drag app icons to middle
+deactivate show title
+lock taskbar
