@@ -1,4 +1,0 @@
-dpkg -s seach
-sudo apt-get install
-sudo apt-get update
-sudo apt-get remove

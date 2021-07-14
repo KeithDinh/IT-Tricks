@@ -1,6 +1,9 @@
 $branch_name = your branch name
 $file_name = your file name
 
+Undo an ADD:
+	git reset
+	
 Git status
 	git status
 	git status -u // list all modified/untracked files
