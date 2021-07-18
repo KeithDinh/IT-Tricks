@@ -1,0 +1,13 @@
+cat .gitconfig
+
+git config --global -l : view global config
+git config user.name : look at current folder, if local config doesn't exist, it'll look for global config
+
+git config --global --unset user.name : remove global username
+
+git config --global user.name "Username" : set global username 
+git config --global user.email "Username@email.com" : set global email
+
+
+git config --global credential.helper cache : save password the next time input
+git config --global --unset credential.helper cache : remove stored password
