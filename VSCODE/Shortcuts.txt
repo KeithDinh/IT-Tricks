@@ -8,7 +8,7 @@ W: close current tab
 1,2,3: switch splitscreen panels
 
 Space: show info/suggestions
-`: terminal
+Backtick `: terminal
 ----------------------------------------------------------------------------
 Ctrl + Alt + Arrows: Select multiple line to type
 
@@ -29,5 +29,7 @@ hold and move up down to move line up down
 1,2,3: switch tabs in current panel
 
 Shift+Command/Ctrl+L: Select all instances of a word
+O : switch btw component and template (view)
+Shift + F : format your code 
 
 

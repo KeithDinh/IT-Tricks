@@ -9,5 +9,19 @@ git config --global user.name "Username" : set global username
 git config --global user.email "Username@email.com" : set global email
 
 
-git config --global credential.helper cache : save password the next time input
+git config --global credential.helper cache : save password the next time input, will expire after 900s
+git config --global credential.helper "cache --timeout=3600": 
+
 git config --global --unset credential.helper cache : remove stored password
+
+git config --global credential.helper store 
+ 
+ Git Log Out
+	git config --global --unset-all
+	OR
+	git config --global --unset user.name
+	git config --global --unset user.email
+	git config --global --unset credential.helper
+
+
+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

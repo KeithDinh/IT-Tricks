@@ -1,0 +1,2 @@
+git reset : unstaged all files and keep changes
+git restore --staged file : unstaged a specific file

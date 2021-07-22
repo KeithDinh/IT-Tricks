@@ -1,0 +1,3 @@
+Rename commit
+	git commit --amend (then it will prompt a window to change the commit message)
+	git push --force (optional: [branch])

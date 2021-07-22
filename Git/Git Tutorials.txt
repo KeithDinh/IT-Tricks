@@ -1,8 +1,5 @@
 $branch_name = your branch name
 $file_name = your file name
-
-Undo an ADD:
-	git reset
 	
 Git status
 	git status
@@ -15,19 +12,10 @@ Git commit
 	git commit -m [message] // commit change with message
 	git commit -am [message] // auto add only modified files (not include untracked files) and commit with message 
 
-Rename commit
-	git commit --amend (then it will prompt a window to change the commit message)
-	git push --force (optional: [branch])
-
 First time push to 
 	git push --set-upstream origin branch_name
 
 Git Branch
-	// modify branch name
-	git checkout old_branch_name
-	git branch -m new_branch-name
-	git push origin --delete old_branch_name
-	git push origin -u new_branch-name
 
 	// list all branches
 	git branch -a
@@ -58,19 +46,7 @@ Git Stop Tracking a File/Folder. This doesn't remove the file in the folder
 	git rm -r --cached <folder>
 
 	git commit -m "something" && git push
-	
-Git Log Out
-	git config --global --unset-all
-	OR
-	git config --global --unset user.name
-	git config --global --unset user.email
-	git config --global --unset credential.helper
 
-Rename Branch
-	git checkout old_branch_name
-	git branch -m new_branch_name
-	git push origin -m new_branch-name
-	git push origin --delete old_branch_name
 
 Git Stash
 	git stash save “Your stash message”

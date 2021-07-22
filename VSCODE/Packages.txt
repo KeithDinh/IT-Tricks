@@ -6,3 +6,11 @@ ESLint
 Live Share
 Live Server
 Visual Studio Intellicode
+
+
+[Angular]
+Angular Language Service
+Angular Snippets
+Angular2 Switcher
+Auto Close Tag
+Auto Rename Tag
