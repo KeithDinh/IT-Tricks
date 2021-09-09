@@ -24,4 +24,3 @@ git config --global credential.helper store
 	git config --global --unset credential.helper
 
 
-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
